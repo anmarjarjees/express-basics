@@ -2,12 +2,15 @@
 A quick introduction to "Express", the minimalist web framework for Node.js 
 
 Quick Demonstration for creating a web server based on the Express JS "Getting Started" and "Guide" :-)
+
+# Resources and Tools:
 - [ExpressJS.com](https://expressjs.com/)
 - [Express web framework (Node.js/JavaScript)](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs)
 - [nodemon npm](https://www.npmjs.com/package/nodemon)
 - [nodemon.io](https://nodemon.io/)
 - ["Mockaroo.com"](https://www.mockaroo.com/)
 - [Postman](https://www.postman.com/)
+- [Express Tutorial: The Local Library website](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/Tutorial_local_library_website)
 
 # Repo Code Files:
 This repo includes the following JavaScript files. To clearly understand Express, you should go with the following sequence. Also this readme file will show you the relevant code file based on each topic.
@@ -17,6 +20,8 @@ This repo includes the following JavaScript files. To clearly understand Express
 - index4.js
 - index5.js
 - index6.js
+- index7.js
+- index8.js
 
 # Installation:
 The installation steps were taken form [ExpressJS](https://expressjs.com/en/starter/installing.html)
@@ -267,7 +272,7 @@ For the scope of this course, two things to consider:
  # About Express Middleware
  Express is a [routing and middleware web framework](https://expressjs.com/en/guide/using-middleware.html) that has minimal functionality of its own: An Express application is essentially a series of middleware function calls. Middleware is simply a function or piece of code that it's is run in the middle of getting a request from the client and sending a response from the server.
 
- Middleware functions are functions that have access to:
+ Based on Express Docs, middleware functions are functions that have access to:
  - the request object (req)
  - the response object (res)
  - the next middleware function in the application’s request-response cycle. The next middleware function is commonly denoted by a variable named next.
@@ -324,16 +329,17 @@ express.static(root, [options])
 
 # Working with JSON Files [express.json() and express.urlencoded()]:
 (https://expressjs.com/en/4x/api.html#express.json)
-- express.json() for parsing incoming request data to be sent in JSON format.
-  ```
-  {
-    "prop": " \"Our JSON Object Property Value\""
-  }
-  ```
-- express.urlencoded() for parsing incoming request data to be sent encoded in the URL.
+- express.json() for parsing incoming request data to be sent in JSON format. VS Code can show you this tip/hint when we hover our mouse over this middleware: **"Returns middleware that only parses json and only looks at requests where the --"Content-Type"-- header matches the type option."**
+
   ```
   {
     "prop": "Our JSON Object Property Value"
+  }
+  ```
+- express.urlencoded() for parsing incoming request data to be sent encoded in the URL. VS Code can show you this tip/hint when we hover our mouse over this middleware: **Returns middleware that only parses urlencoded bodies and only looks at requests where the Content-Type header matches the type option**
+  ```
+  {
+    "prop": " \"Our JSON Object Property Value\""
   }
   ```
 
@@ -342,24 +348,83 @@ We put them on action by writing our code then using Postman to test the .post()
  |***:computer: Code Reference: index6.js***|
  |:---:|
 
-After writing your code. VS Code can show you this tip/hint:
-**"Returns middleware that only parses json and only looks at requests where the --"Content-Type"-- header matches the type option."**
-So pay attention to "Content-Type" as we will use it in the "Headers" section. Also we want to the value to be in JSON:
+After writing our code. Pay attention to the ["Content-Type"](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) and check ["The Media Type on Wikipedia"](https://en.wikipedia.org/wiki/Media_type) as we will use it in the "Headers" section. based on the [types' values examples in Wikipedia](https://en.wikipedia.org/wiki/Media_type#Common_examples_[10]), the two types that we use with Express Middleware:
+- application/json => to be used as the value for the key "Content-Type" with express.json()
+- application/x-www-form-urlencoded => to be used as the value for the key "Content-Type" with express.urlencoded()
 
-in our code file "index6.js" => we used => app.use(express.json());
-Then change the following in Postman:
--Below are the first change(s) to make
-![JSON Step1 on Postman](repo-assets/json-post-step1.jpg)
+Also we want to the value to be in JSON: 
 
-- Below are the second/last change(s) to make in the "body" section by clicking "row"
-![JSON Step2 on Postman](repo-assets/json-post-step2.jpg)
+- In our code file "index6.js" => we used => app.use(express.json());
+  Then change the following in Postman:
+  -Below are the first change(s) to make
+  ![JSON Step1 on Postman](repo-assets/json-post-step1.jpg)
 
-Finally, in our code file "index6.js" => we used => app.use(express.urlencoded({ extended: true }));
-Then change the following in Postman:
--Below are the first change(s) to make
-![JSON URL Step1 on Postman](repo-assets/json-url-post-step1.jpg)
+  - Below are the second/last change(s) to make in the "body" section by clicking "row"
+  ![JSON Step2 on Postman](repo-assets/json-post-step2.jpg)
 
-- Below are the second/last change(s) to make in the "body" section by clicking "row"
-![JSON URL Step2 on Postman](repo-assets/json-url-post-step2.jpg)
+- Finally, in our code file "index6.js" => we used => app.use(express.urlencoded({ extended: true }));
+  Then change the following in Postman:
+  -Below are the first change(s) to make
+  ![JSON URL Step1 on Postman](repo-assets/json-url-post-step1.jpg)
 
-***To be continued...***
+  - Below are the second/last change(s) to make in the "body" section by clicking "row"
+  ![JSON URL Step2 on Postman](repo-assets/json-url-post-step2.jpg)
+
+# Error Handling
+[Error Handling](https://expressjs.com/en/guide/error-handling.html#error-handling) refers to how Express catches and processes errors that occur both synchronously and asynchronously. Express comes with a default error handler so you don't need to write your own to get started.
+```
+app.get('/', (req, res) => {
+  throw new Error('BROKEN') // Express will catch this on its own.
+})
+```
+## Writing error handlers
+Define [error-handling middleware functions](https://expressjs.com/en/guide/error-handling.html#error-handling) in the same way as other middleware functions, except error-handling functions have four arguments instead of three: (err, req, res, next). 
+The reason for creating a custom error handler is to hide the technical error list/details (The stack trace of errors) and provide a simple brief message to the client when an error occurred in our application:
+
+For example:
+```
+app.use((err, req, res, next) => {
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
+});
+```
+
+ |***:computer: Code Reference: index7.js***|
+ |:---:|
+
+
+ # Debugging Express
+ Express uses the [debug module](https://expressjs.com/en/guide/debugging.html#debugging-express) internally to log information about route matches, middleware functions that are in use, application mode, and the flow of the request-response cycle.
+
+ To see all the internal logs used in Express, set the DEBUG environment variable to express:
+ * when launching your app.
+- On any OS:
+  > DEBUG=express:* node index.js
+- On Windows:
+  > set DEBUG=express:* & node index.js
+
+To practice the command above, don't forget the file name, in my case it's index8.js, also don't forget that we changed the value of the property "start" for the script in the json file to be:<br>
+"nodemon --experimental-json-modules", and finally since I am using windows:
+  - in CMD Window:
+    > set DEBUG=express:* & node --experimental-json-modules index8.js
+  - in GitBash:
+    > DEBUG=express:* node --experimental-json-modules index8.js
+
+  No new code or topic in this last code file, it's just to practice the DEBUG command
+ |***:computer: Code Reference: index8.js***|
+ |:---:|
+
+ NOTE: Instead of running the DEBUG command every time you run your app, you can add it to your package.json file.
+ The JSON file "package.json" looks like this:
+```
+  "scripts": {
+    "start": "nodemon --experimental-json-modules"
+  },
+``` 
+We can add one more property named "debug", I will use the syntax of GitBash:
+```
+  "scripts": {
+    "start": "nodemon --experimental-json-modules",
+    "debug": "DEBUG=express:* nodemon --experimental-json-modules"
+  },
+```

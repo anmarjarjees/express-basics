@@ -1,8 +1,17 @@
 /*
 Since we modified our JSON file to use modules,
-so instead of using this:
+
+So instead of using the CommonJS way to require modules like this:
 var express = require('express');
-We can use this:
+
+OR another example:
+var bodyParser = require('body-parser')
+
+We will use the ES6 syntax to import the needed packages like this:
+
+import bodyParser from 'body-parser'
+
+so in our case, the ES6 syntax to import "express" will be:
 */
 import express from "express";
 // importing the json file to our index.js:
@@ -24,17 +33,17 @@ const PORT = 3000; // defining the port number to be 3000 as a convention based 
 // 1- Port Number
 // 2- Anonymous Arrow Function
 app.listen(PORT, () => {
-    // Notice that console.log() will output the data on the server side as we are using node.js
-    // It's not like console.log() for outputting the data on the console window of the browser
-    // In the next sections, we will need to transfer the data from the server to the client's browser
-    /*
-      Also, we cannot use the alert() function 
-      as it is a method that belongs to browser "window" object 
-      It is not part of JavaScript
-    */
-    console.log(`Express App Server listening on port ${PORT} and the local server URL: http://localhost:3000/`);
-    // outputting the data:
-    console.log(data);
+  // Notice that console.log() will output the data on the server side as we are using node.js
+  // It's not like console.log() for outputting the data on the console window of the browser
+  // In the next sections, we will need to transfer the data from the server to the client's browser
+  /*
+    Also, we cannot use the alert() function 
+    as it is a method that belongs to browser "window" object 
+    It is not part of JavaScript
+  */
+  console.log(`Express App Server listening on port ${PORT} and the local server URL: http://localhost:3000/`);
+  // outputting the data:
+  console.log(data);
 });
 
 // To break the running server => CTRL + C

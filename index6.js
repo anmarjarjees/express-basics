@@ -29,7 +29,9 @@ Returns middleware that only parses json and only looks at requests
 where the "Content-Type" header matches the type option.
 */
 
-// Please comment/uncomment either one from app.use() to test the both middleware functions
+// **********************************************************************************************
+// NOTE: Please comment/uncomment either one from app.use() to test the both middleware functions
+// **********************************************************************************************
 
 // Below we are specifying our request to be in JSON object format:
 // app.use(express.json());
@@ -38,7 +40,7 @@ where the "Content-Type" header matches the type option.
 // we need to pass the parameter which is the object "{ extended: true }" to accept json object
 app.use(express.urlencoded({ extended: true }));
 
-// .json() and .urlencoded():
+// Using .post() for "Create/Add" with .json() and .urlencoded():
 /*
 Let's name our route (path) to be "prop" for properties 
 as we are going to deal with JSON object properties and values
