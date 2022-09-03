@@ -67,8 +67,7 @@ app.get("/members/:memberId/age/:age", (req, res) => {
     */
     const memberId = Number(req.params.memberId);
     const memberAge = Number(req.params.age);
-    res.send(`Member ID: ${memberId} <br>
-              Member Age: ${memberAge}`); // displayed in the browser
+    res.send(`Member ID: ${memberId} <br> Member Age: ${memberAge}`); // displayed in the browser
     /*
     Output:
     Member ID: 28
