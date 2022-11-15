@@ -13,6 +13,7 @@ import bodyParser from 'body-parser'
 
 so in our case, the ES6 syntax to import "express" will be:
 */
+// First: import "express"
 import express from "express";
 // importing the json file to our index.js:
 // I have added { type: 'json' }
@@ -31,7 +32,7 @@ const PORT = 3000; // defining the port number to be 3000 as a convention based 
 // This line is boilerplate code from Express docs to run our server:
 // using the method listen() of "app" object that takes two parameters:
 // 1- Port Number
-// 2- Anonymous Arrow Function
+// 2- A function (Using Anonymous Arrow Function)
 app.listen(PORT, () => {
   // Notice that console.log() will output the data on the server side as we are using node.js
   // It's not like console.log() for outputting the data on the console window of the browser
@@ -39,11 +40,15 @@ app.listen(PORT, () => {
   /*
     Also, we cannot use the alert() function 
     as it is a method that belongs to browser "window" object 
-    It is not part of JavaScript
+    It is not part of JavaScript node.js 
   */
   console.log(`Express App Server listening on port ${PORT} and the local server URL: http://localhost:3000/`);
-  // outputting the data:
+
+  // outputting the data (JSON File):
   console.log(data);
 });
-
+// To run this file (ReadMe content) => npm start index1
+// You will see this error in the browser => Cannot GET /
+// There is no HTTP message (using HTTP method) that was sent to the server
+// Will be solved in the next file
 // To break the running server => CTRL + C

@@ -116,6 +116,9 @@ app.get("/workers/:id/", (req, res) => {
     (element) => {
         return element.id === workerId;
     }
+
+    can be written in shorthand:
+    (element) => element.id === workerId
     */
     const worker = data.filter((element) => element.id === workerId);
     res.send(worker); // the same result/output as above

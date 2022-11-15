@@ -47,7 +47,6 @@ NOTE: The code above could be written using an anonymous function:
 app.get('/', function(req, res) {
   res.send('Hello World!');
 });
-
 */
 
 // URL => http://localhost:3000/about

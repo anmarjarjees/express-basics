@@ -4,7 +4,8 @@ Before reading this file, please refer to the following file(s)  and review them
 - index2.js
 */
 import express from "express";
-import data from './data/mock-data.json' assert { type: 'json' };
+// not in use:
+// import data from './data/mock-data.json' assert { type: 'json' };
 
 const app = express();
 

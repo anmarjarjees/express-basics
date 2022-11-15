@@ -1,16 +1,12 @@
 # Express-Basics
 A quick introduction to "Express", the minimalist web framework for Node.js 
 
-Quick Demonstration for creating a web server based on the Express JS "Getting Started" and "Guide" :-)
+Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.
 
-# Resources and Tools:
-- [ExpressJS.com](https://expressjs.com/)
-- [Express web framework (Node.js/JavaScript)](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs)
-- [nodemon npm](https://www.npmjs.com/package/nodemon)
-- [nodemon.io](https://nodemon.io/)
-- ["Mockaroo.com"](https://www.mockaroo.com/)
-- [Postman](https://www.postman.com/)
-- [Express Tutorial: The Local Library website](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/Tutorial_local_library_website)
+Quick Demonstration for:
+- installing ExpressJs
+- Creating a web server based on the Express JS "Getting Started" and "Guide" :-)
+- Using Express Routing to generate sever-side code
 
 # Repo Code Files:
 This repo includes the following JavaScript files. To clearly understand Express, you should go with the following sequence. Also this readme file will show you the relevant code file based on each topic.
@@ -23,22 +19,28 @@ This repo includes the following JavaScript files. To clearly understand Express
 - index7.js
 - index8.js
 
-# Installation:
+# Installation and Setting up the Project:
+We can install Express and initialize/set up the project from scratch, or we can use the "Express Application Generator". Please refer to my repo ["express-application"](https://github.com/anmarjarjees/express-application) for more details about installing and running Express application using the "Express application generator" tool.
+
+## Installing Node.js
 The installation steps were taken form [ExpressJS](https://expressjs.com/en/starter/installing.html)
-1. You have already installed Node.js, create a directory/folder to hold your application, and make that your working directory. In my case it's the same as its remote repo name "express-basics"
+
+1. You have already installed Node.js. Create a directory/folder to hold your application, and make that your working directory. In my case it's the same as its remote GitHub repo name "express-basics"
     - Open VS Code Terminal, You can click the arrow to choose your favourite CLI:
         - GitBash (the cross-platform CLI)
         - Powershell (Only for Windows users)
     - You can check if you have node.js by running this command to check its version:
         - node -v
+        OR:
+        - node --version
 
-2. Use the npm init command to create a "package.json" file for your application. For more information on how package.json works, see Specifics of npm’s package.json handling.
+## Initiating the package JSON file
+2. Navigate to your project folder then use the "npm init" command to create a "package.json" file for your application. For more information on how package.json works, see Specifics of npm's package.json handling.
 
 > npm init
 
-You can add -y to skip all the questions:
-
-> npm init -y
+NOTE: 
+Enter app.js, sever.js, or whatever you want the name of the main file to be. If you want it to be index.js, hit RETURN to accept the suggested default file name which will be "index.js".
 
 This command will create a "package.json" file that contains information about the application and much more important the "dependencies" package(s). No packages is shown at the beginning:
 ```
@@ -65,12 +67,13 @@ This command will create a "package.json" file that contains information about t
   "homepage": "https://github.com/anmarjarjees/express-basics#readme"
 }
 ```
-You will have the following content:
+After running the command "npm init", you will have above "package.json" file
 
+NOTE:
+- You can add -y to skip all the questions:
+> npm init -y
 
-3. Enter app.js, sever.js, or whatever you want the name of the main file to be. If you want it to be index.js, hit RETURN to accept the suggested default file name which will be "index.js".
-
-Now install Express in your working directory and save it in the dependencies list. For example:
+3. Now install Express in your working directory (folder) and save it in the dependencies list:
 > npm install express
 Or just using "i" for install:
 > npm i express
@@ -116,6 +119,7 @@ inside package.json, you can see that "express" is for sure onr of the dependenc
 ```
 NOTE:
 You can install more than one package together within a single command:
+in the example below, we are installing express and nodmon by running this one command:
 > npm install express nodmon
 
 6. Modify the package.json file manually by replacing the property "test" of the script below:
@@ -136,7 +140,7 @@ Since your application entry point file named "index", so you can exclude the fi
     - You can just write:
         > "start": "nodemon"
 
-But remember that if your entry point js file has different name, you will have to specify
+But remember that if your entry point which is the .js file has different name, you will have to specify
 
 Finally, one more last change, if you are planning to load JSON files, you will have to specify this also:
     - add a separate flag "--experimental-json-modules" to enable experimental support for import of JSON files. 
@@ -146,10 +150,11 @@ Finally, one more last change, if you are planning to load JSON files, you will 
     "start": "nodemon --experimental-json-modules"
   },
 ```
-Swap nodemon instead of node to run your code, and now your process will automatically restart when your code changes."
+Swap nodemon instead of node to run your code, and now your process will automatically restart when your code changes.
 
-7. One more optional but good change, remember that in node.js we used require() function to include other modules as it's the original way to import/embed modules since the first versions of node.js and still working with the new versions. However, we can also use the "import" with "exports" command going with the new versions to import modules. This technique has been introduced in ES6. So if you like to go with this option, you will need to modify the "package,json" file by adding the property and value ["type": "module"]. Here is what VS Code will tell your *"When set to "module", the type field allows a package to specify all .js files within are ES modules. If the "type" field is omitted or set to "commonjs", all .js files are treated as CommonJS."*:<br>
-You can add it anywhere at the beginning:
+7. One more optional but good change, remember that in node.js we used require() function to include other modules as it's the original way to import/embed modules since the first versions of node.js and still working with the new versions. 
+However, we can also use the "import" with "exports" command going with the new versions to import modules. This technique has been introduced in ES6. So if you like to go with this option, you will need to modify the "package,json" file by adding the property and value ["type": "module"]. Here is what VS Code will tell your *"When set to "module", the type field allows a package to specify all .js files within are ES modules. If the "type" field is omitted or set to "commonjs", all .js files are treated as CommonJS."*:<br>
+You can add it anywhere at the beginning: "type": "module"
 ```
 {
   "type": "module",
@@ -173,10 +178,13 @@ You can add it anywhere at the beginning:
     <br>OR just use this command assuming that the entry point file is "index.js":<br>
     > npm start
     <br>if you want to run other file as an entry point to your app and the name is not index, you have to write the name:
-    > npm start index2
+    > npm start index1
 
  |***:computer: Code Reference: index1.js***|
  |:---:|
+
+# Express.js and Node.js
+![ExpressJs and Node.JS HTTP Diagram](/repo-assets/express-workflow.jpg)
 
 # Response methods
 The methods on the response object (res) in the following table can send a response to the client, and terminate the request-response cycle. If none of these methods are called from a route handler, the client request will be left hanging.
@@ -205,7 +213,7 @@ I have done the following changes:
 
 - Then download the json file and save it into your project folder inside a sub-folder named "data" by convention.
 
-- You can open the json file with VS code and press "ALT+SHIFT+F" to format the lines
+- You can open the json file with VS code and press the same hotkeys "ALT+SHIFT+F" to format the lines
 
 NOTE: 
 The project folder contains a sub-folder named "data", the "data" folder contains:
@@ -214,7 +222,7 @@ The project folder contains a sub-folder named "data", the "data" folder contain
 
 # Route - Routing:
 Routing refers to how an application's endpoints (URIs) respond to client requests. 
-Route is consisted of;
+Route is consisted of:
 - a path
 - an HTTP request method
 
@@ -233,11 +241,12 @@ We can use the four HTTP methods: Create, Read, Update, and Delete to implement 
  ![http-communications.jpg](repo-assets/http-communications.jpg)
 
 # Postman and JSON Data
-In our application we used the four commonly used HTTP methods for CRUD operations, but we are able to only test the .get() method. For trying and testing the other three method, we will use a free tool to test our Route named "Postman".
+In our application we used the four commonly used HTTP methods for CRUD operations, but we are able to only test the .get() method. For trying and testing the other three method, we will use a free tool to test all our Routes named "Postman".
 
-[What is Postman?](https://www.postman.com/)
+## [What is Postman?](https://www.postman.com/)
 Postman is an API platform for building and using APIs. Postman simplifies each step of the API lifecycle and streamlines collaboration so you can create better APIs—faster.
 
+### Steps to do
 - Create a free account with postman.com
 - Download the Desktop application based on your OS
 - Run the downloaded executable file, postman will ask you either to sign in or create an account
@@ -275,7 +284,7 @@ For the scope of this course, two things to consider:
  Based on Express Docs, middleware functions are functions that have access to:
  - the request object (req)
  - the response object (res)
- - the next middleware function in the application’s request-response cycle. The next middleware function is commonly denoted by a variable named next.
+ - the next middleware function in the application's request-response cycle. The next middleware function is commonly denoted by a variable named next.
 
 Middleware functions can perform the following tasks:
 - Execute any code.
@@ -392,7 +401,6 @@ app.use((err, req, res, next) => {
  |***:computer: Code Reference: index7.js***|
  |:---:|
 
-
  # Debugging Express
  Express uses the [debug module](https://expressjs.com/en/guide/debugging.html#debugging-express) internally to log information about route matches, middleware functions that are in use, application mode, and the flow of the request-response cycle.
 
@@ -428,3 +436,16 @@ We can add one more property named "debug", I will use the syntax of GitBash:
     "debug": "DEBUG=express:* nodemon --experimental-json-modules"
   },
 ```
+
+# Resources and Tools:
+- [Jamie Pittman](https://github.com/jlp0328): Full-Stack Software Engineer III
+- [Dave Gray](https://github.com/gitdagray): Solutions Architect / Software Engineer / Web Developer / Instructor / PhD in Information Systems Candidate
+- [ExpressJS.com](https://expressjs.com/)
+- [Express web framework (Node.js/JavaScript)](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs)
+- [nodemon npm](https://www.npmjs.com/package/nodemon)
+- [nodemon.io](https://nodemon.io/)
+- ["Mockaroo.com"](https://www.mockaroo.com/)
+- [Postman](https://www.postman.com/)
+- [Express Tutorial: The Local Library website](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/Tutorial_local_library_website)
+- [Computer Hope - Website with Node.js and Express](https://www.computerhope.com/issues/ch002070.htm#menu.js)
+- [FreeCodeCamp News](https://www.freecodecamp.org/news/)
