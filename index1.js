@@ -2,10 +2,10 @@
 Since we modified our JSON file to use modules,
 
 So instead of using the CommonJS way to require modules like this:
-var express = require('express');
+const express = require('express');
 
 OR another example:
-var bodyParser = require('body-parser')
+const bodyParser = require('body-parser')
 
 We will use the ES6 syntax to import the needed packages like this:
 
