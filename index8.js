@@ -23,6 +23,7 @@ app.get("/users", (req, res) => {
 
 // http://localhost:3000/workers/12
 app.get("/workers/:id/", (req, res) => {
+    // using JS Number() to convert the text value to number
     const workerId = Number(req.params.id);
     const worker = data.filter((element) => element.id === workerId);
     res.send(worker); // the same result/output as above
