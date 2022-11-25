@@ -15,7 +15,7 @@ so in our case, the ES6 syntax to import "express" will be:
 */
 // First: import "express"
 import express from "express";
-// importing the json file to our index.js:
+// importing the json file to our index1.js:
 // I have added { type: 'json' }
 // Link: https://nodejs.org/api/esm.html#import-assertions
 import data from './data/mock-data.json' assert { type: 'json' };
@@ -52,3 +52,6 @@ app.listen(PORT, () => {
 // There is no HTTP message (using HTTP method) that was sent to the server
 // Will be solved in the next file
 // To break the running server => CTRL + C
+/* 
+Warning: To load an ES module, set "type": "module" in the package.json or use the .mjs extension.
+*/
