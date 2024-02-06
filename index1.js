@@ -1,17 +1,20 @@
 /*
 Since we modified our JSON file to use modules,
 
-So instead of using the CommonJS way to require modules like this:
+So instead of using the "CommonJS" way to require modules like this:
 const express = require('express');
 
 OR another example:
 const bodyParser = require('body-parser')
 
-We will use the ES6 syntax to import the needed packages like this:
+We will use the ES6 syntax "ES Module" to import the needed packages like this:
 
 import bodyParser from 'body-parser'
 
 so in our case, the ES6 syntax to import "express" will be:
+
+NOTE: 
+We used "Mockaroo.com" to help us generate a mock data in JSON format quickly :-)
 */
 // First: import "express"
 import express from "express";

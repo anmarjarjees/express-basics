@@ -22,20 +22,24 @@ This repo includes the following JavaScript files. To clearly understand Express
 # Installation and Setting up the Project:
 We can install Express and initialize/set up the project from scratch, or we can use the "Express Application Generator". Please refer to my repo ["express-application"](https://github.com/anmarjarjees/express-application) for more details about installing and running Express application using the "Express application generator" tool.
 
-## Installing Node.js
+## Installing Express
 The installation steps were taken form [ExpressJS](https://expressjs.com/en/starter/installing.html)
 
+### Verify the Node installation and version
 1. You have already installed Node.js. Create a directory/folder to hold your application, and make that your working directory. In my case it's the same as its remote GitHub repo name "express-basics"
     - Open VS Code Terminal, You can click the arrow to choose your favourite CLI:
         - GitBash (the cross-platform CLI)
         - Powershell (Only for Windows users)
+        !["CLI Options"](/repo-assets/cli-options.png)
     - You can check if you have node.js by running this command to check its version:
         - node -v
         OR:
         - node --version
 
+NOTE: for quick review about using node, check my GitHub repo about ["Starting with Node"](https://github.com/anmarjarjees/node.js-start)
+
 ## Initiating the package JSON file
-2. Navigate to your project folder then use the "npm init" command to create a "package.json" file for your application. For more information on how package.json works, see Specifics of npm's package.json handling.
+2. Navigate to your project folder which is "Express-Basics" in our case, then use the "npm init" command to create a "package.json" file for your application. For more information on how package.json works, see [Specifics of npm's package.json handling](https://docs.npmjs.com/cli/v10/configuring-npm/package-json).
 
 > npm init
 
@@ -94,7 +98,7 @@ Plus modifying the "package.json" file. After install "express", you will have t
 4. Create your starting point JS file like: index.js, app.js, or...
 refer to my code file: index.js
 
-5. Another optional package but very important is called "nodemon". Based on what they say in nodemon official website: Nodemon is a utility that will monitor for any changes in your source code and automatically restart your server. In other word, it will restart your server automatically every time you save your file.
+5. Another optional package but very important is called "nodemon". Based on what they say in nodemon official website: Nodemon is a utility that will monitor for any changes in your source code and automatically restart your server. In other words, it will restart your server automatically every time you save your file.
 - [nodemon npm](https://www.npmjs.com/package/nodemon)
 - [nodemon.io](https://nodemon.io/)
 - You can install nodemon as a dependency:
@@ -102,7 +106,7 @@ refer to my code file: index.js
 - Or installing nodemon as a development dependency: [npm install <package-name> --save-dev]
 > npm install nodemon --save-dev  
 
-The differences between dependency and development dependency:
+## The differences between dependency and development dependency:
 - "dependencies": Packages required by your application in production.
 - "devDependencies": Packages that are only needed for local development and testing
 
@@ -119,7 +123,7 @@ inside package.json, you can see that "express" is for sure onr of the dependenc
 ```
 NOTE:
 You can install more than one package together within a single command:
-in the example below, we are installing express and nodmon by running this one command:
+in the example below, we are installing "express" and "nodmon" by running this one command:
 > npm install express nodmon
 
 6. Modify the package.json file manually by replacing the property "test" of the script below:
@@ -357,6 +361,7 @@ We put them on action by writing our code then using Postman to test the .post()
  |***:computer: Code Reference: index6.js***|
  |:---:|
 
+## Postman Settings for testing express.json and express.urlencoded
 After writing our code. Pay attention to the ["Content-Type"](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) and check ["The Media Type on Wikipedia"](https://en.wikipedia.org/wiki/Media_type) as we will use it in the "Headers" section. based on the [types' values examples in Wikipedia](https://en.wikipedia.org/wiki/Media_type#Common_examples_[10]), the two types that we use with Express Middleware:
 - application/json => to be used as the value for the key "Content-Type" with express.json()
 - application/x-www-form-urlencoded => to be used as the value for the key "Content-Type" with express.urlencoded()
@@ -373,7 +378,7 @@ Also we want to the value to be in JSON:
 
 - Finally, in our code file "index6.js" => we used => app.use(express.urlencoded({ extended: true }));
   Then change the following in Postman:
-  -Below are the first change(s) to make
+  -Below are the first change(s) to make. If we click the "VALUE" box and start typing "url", Postman should give us the URL that we need to use:
   ![JSON URL Step1 on Postman](repo-assets/json-url-post-step1.jpg)
 
   - Below are the second/last change(s) to make in the "body" section by clicking "row"
@@ -404,15 +409,18 @@ app.use((err, req, res, next) => {
  # Debugging Express
  Express uses the [debug module](https://expressjs.com/en/guide/debugging.html#debugging-express) internally to log information about route matches, middleware functions that are in use, application mode, and the flow of the request-response cycle.
 
- To see all the internal logs used in Express, set the DEBUG environment variable to express:
+ To see all the internal logs used in Express, set the **"DEBUG environment variable"** to express:
  * when launching your app.
 - On any OS:
   > DEBUG=express:* node index.js
 - On Windows:
   > set DEBUG=express:* & node index.js
 
-To practice the command above, don't forget the file name, in my case it's index8.js, also don't forget that we changed the value of the property "start" for the script in the json file to be:<br>
-"nodemon --experimental-json-modules", and finally since I am using windows:
+To practice the command above, don't forget the file name, in my case it's index8.js, also don't forget that we changed the value of the **property "start"** for the script in the **package.json** file to be:
+```
+"nodemon --experimental-json-modules"
+```
+And finally since I am using windows:
   - in CMD Window:
     > set DEBUG=express:* & node --experimental-json-modules index8.js
   - in GitBash:
@@ -437,11 +445,12 @@ We can add one more property named "debug", I will use the syntax of GitBash:
   },
 ```
 
-# Resources and Tools:
+# Resources, References, and Credits:
 - [Jamie Pittman](https://github.com/jlp0328): Full-Stack Software Engineer III
 - [Dave Gray](https://github.com/gitdagray): Solutions Architect / Software Engineer / Web Developer / Instructor / PhD in Information Systems Candidate
 - [ExpressJS.com](https://expressjs.com/)
 - [Express web framework (Node.js/JavaScript)](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs)
+- [Modules: ECMAScript modules](https://nodejs.org/api/esm.html)
 - [nodemon npm](https://www.npmjs.com/package/nodemon)
 - [nodemon.io](https://nodemon.io/)
 - ["Mockaroo.com"](https://www.mockaroo.com/)

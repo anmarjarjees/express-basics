@@ -14,6 +14,11 @@ import data from './data/mock-data.json' assert { type: 'json' };
 const app = express();
 
 const PORT = 3000;
+/*
+Practicing "Debugging in Express"
+nothing new in this code, it's about running the DEBUG CLI command
+Refer to my article "Debugging Express" in README.md file
+*/
 
 // URL => http://localhost:3000/users
 app.get("/users", (req, res) => {

@@ -33,7 +33,7 @@ Request URL: http://localhost:3000/users/34/books/8989
 req.params: { "userId": "34", "bookId": "8989" }
 Link: https://expressjs.com/en/guide/routing.html
 
-passing the id of 34
+passing the id of 34 (notice you can keep change the value with enter key to confirm)
 
 Notice that we are using a colon ":" to precede the route parameters
 */
@@ -59,8 +59,9 @@ app.get("/members/:memberId/age/:age", (req, res) => {
 
     // we can assign the returned parameters values to variables:
     /*
-    Notice that all the values will be a string data type,
-    if you want to save them as numbers we need to convert them using
+    IMPORTANT NOTE:
+    All the values (route parameters) will be accepted as "string" data type,
+    if you want to save them as numbers we need to convert them using one of the JS functions:
     - Number()
     - parseInt()
     - parseFloat()
@@ -85,7 +86,7 @@ app.get("/employees/:id", (req, res) => {
     // getting all the data from the JSON file:
     // Don't forget that we are importing the data from the JSON file above
     /*
-    Using JS array method .filter() to filter the returned data based on the id
+    Using JS array method ".filter()" to filter the returned data based on the id
     The filter() method:
     - creates a new array filled with elements that pass a test provided by a function.
     - does not execute the function for empty elements.
@@ -97,6 +98,14 @@ app.get("/employees/:id", (req, res) => {
     const employee = data.filter((employee) => {
         return employee.id === empId;
     });
+
+    /*
+    Good to know :-)
+    with arrow functions, we can omit the return and phrase it like this:
+  */
+    // temp is useless, it's just for learning :-)
+    const temp = data.filter((employee) => employee.id === empId);
+
     res.send(employee);
     // [{"id":12,"first_name":"Timmi","last_name":"Carnew","email":"tcarnewb@xrea.com","gender":"Female","job_title":"Technical Writer"}]
 });
@@ -107,7 +116,7 @@ app.get("/employees/:id", (req, res) => {
 app.get("/workers/:id/", (req, res) => {
     const workerId = Number(req.params.id);
     /*
-    Below, I used "element" just to show that we can use any temporary varaible name 
+    Below, I used "element" just to show that we can use any temporary variable name 
     to refer to each element inside the array that we need to filter.
 
     also notice that we ignored the { } for the arrow function and we skipped the keyword "return"

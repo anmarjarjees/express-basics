@@ -1,5 +1,6 @@
 /*
-Before reading this file, please refer to the following file(s)  and review them with the same sequence for better understanding and to clarify the code below:
+Before reading this file, 
+please refer to the following file(s) and review them with the same sequence for better understanding and to clarify the code below:
 - index1.js
 */
 import express from "express";
@@ -27,11 +28,15 @@ Each HTTP method takes two arguments:
 // 1: Practising .get() HTTP method:
 /*
 Based on CRUD, we use .get() for "Read"
-respond with "hello world" when a GET request is made to the homepage
+respond with "hello world" when a "GET" request is made to the homepage
 1. Using the root path with the symbol of '/' as the root for the first parameter
-2. The second parameter is the Route Handler which is a callback function that behaves like middleware to handle a request. You can provide multiple callback functions that behave like middleware to handle a request as we will see later.
+2. The second parameter is the "Route Handler" which is a "callback function".
+This "callback function "behaves like middleware to handle a request. 
+You can provide multiple callback functions that behave like middleware to handle a request as we will see later.
 Link: https://expressjs.com/en/guide/routing.html
-This callback is an anonymous arrow function with two parameters: "req" for "request" and "res" for "response"
+This callback is usually written as an anonymous arrow function with two parameters:
+- "req" for "request" 
+- "res" for "response"
 Notice that we can use or call a another function by its name but it's more practical and common way to use this:
 */
 
@@ -41,7 +46,13 @@ app.get('/', (req, res) => {
     // Passing HTML elements also:
     // using .send() method of res (response)
     res.send('<h1>Hello world! the root</h1>');
+    /*
+    To recap (review the README.md):
+   .send() is one of the res (for response) common methods
+   it's used to send HTTP response
+    */
 });
+
 /*
 NOTE: The code above could be written using an anonymous function:
 app.get('/', function(req, res) {
@@ -57,6 +68,7 @@ app.get('/about', (req, res) => {
 // Another example with getting data from a JSON FILE
 // URL => http://localhost:3000/users
 /*
+NOTE: We need to use "Postman" to test "put", "post", "delete"
 For practising, we are going to get the data from JSON file
 To test it we can use the Postman and the browser
 */
@@ -73,7 +85,7 @@ Let's name our path => /create
 */
 // URL => http://localhost:3000/create
 app.post("/create", (req, res) => {
-    res.send('Practising .post() HTTP method for "Create"');
+    res.send('Practising .post() HTTP method for "Create" using the rout "/create"');
 });
 
 /*
@@ -83,7 +95,7 @@ Let's name our path => /update
 */
 // URL => http://localhost:3000/update
 app.put("/update", (req, res) => {
-    res.send('Practising .put() HTTP method for "Update"');
+    res.send('Practising .put() HTTP method for "Update" using the rout "/update"');
 });
 
 /*
@@ -93,19 +105,22 @@ Let's name our path => /delete
 */
 // URL => http://localhost:3000/delete
 app.delete("/delete", (req, res) => {
-    res.send('Practising .delete() HTTP method for "Delete"');
+    res.send('Practising .delete() HTTP method for "Delete" using the rout "/delete"');
 });
 
 /*
 In all the examples above, we used a single handler (one callback) to handle the Route,
-we and add more than one handler (callbacks) to handle the Route also but it a rare case,
+we can add more than one handler (callbacks) to handle the Route also but it a rare case,
 Let's take just a quick look about how to add two handlers for example.
 
 The routing methods can have more than one callback function as arguments. 
-To add additional callbacks, we use the function next()
+To add additional callbacks, we can add a third parameter use the function next()
 With multiple callback functions, it is important to provide next as an argument to the callback function 
 and then call next() within the body of the function to hand off control to the next callback.
-so .next() can be used as a third argument and by convention it's named "next" although it could any other name. 
+
+NOTE:
+Don't forget that .next() are used as a third argument of the callback function that could be any other name!
+But to avoid the confusion, by convention it's named "next" 
 */
 
 // GET Method with next()
@@ -120,8 +135,9 @@ app.get("/next", (req, res, next) => {
     Notice that the next() function below will invoke the next middleware function
     */
     next(); // adding the next() method to prepare for the next part (block of code):
-},
+}, // adding , then write the second callback which is the next one to be called:
     (req, res) => {
+        // sending a message to the user
         res.send("Practising next() function as the second and last response (second route callback)!");
         console.log("Practising next() function as the second and last response (second route callback)!");
     }
@@ -155,6 +171,11 @@ app.get('/redirect', (req, res) => {
     // res.redirect(); // undefined
     // res.redirect('http://localhost:3000/'); // Going to the root (home page)
     res.redirect('https://expressjs.com/'); // Going to another website
+    /*
+    As explained in README.md, redirect() method can have:
+    - Relative link (within our application)
+    - Absolute link (to another website)
+    */
 });
 
 // URL => http://localhost:3000/status

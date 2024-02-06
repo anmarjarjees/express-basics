@@ -7,50 +7,62 @@ Before reading this file, please refer to the following file(s) and review them 
 - index5.js
 */
 import express from "express";
-import data from './data/mock-data.json' assert { type: 'json' };
 
 const app = express();
 
 const PORT = 3000;
 
-// URL => http://localhost:3000/
-app.get('/', (req, res) => {
-    res.send('<h1>ExpressJS App: The root</h1>');
-});
-
-app.get("/users", (req, res) => {
-    // using the response with the method .json() to get the JSON data:
-    res.json(data);
-});
+/*
+Practicing the other 2 built-in Middleware Functions:
+- express.json:
+- express.urlencoded
+The other built-in function "express.static" were explained in the previous file
+*/
 
 /*
-.json(): 
+.json() method: 
+---------------
 Returns middleware that only parses json and only looks at requests 
 where the "Content-Type" header matches the type option.
 */
 
-// **********************************************************************************************
-// NOTE: Please comment/uncomment either one from app.use() to test the both middleware functions
-// **********************************************************************************************
+/*
+******************************************
+NOTE: 
+Please comment/uncomment either one from:
+- app.use(express.json()) 
+- app.use(express.urlencoded()) 
+to test/check the output of the both middleware functions
+*******************************************
+ */
 
+// STEP#1: Specify the format with .use() method:
 // Below we are specifying our request to be in JSON object format:
 // app.use(express.json());
 
 // Below we are specifying our request to be in JSON url encoded format:
-// we need to pass the parameter which is the object "{ extended: true }" to accept json object
+// we need to pass an argument which is the object "{ extended: true }" to accept json object
 app.use(express.urlencoded({ extended: true }));
 
-// Using .post() for "Create/Add" with .json() and .urlencoded():
+// STEP#2: Using .post() for "Create/Add" with .json() or .urlencoded():
 /*
 Let's name our route (path) to be "prop" for properties 
 as we are going to deal with JSON object properties and values
-using Postman to test the .post() http method
+then using Postman to test the .post() HTTP method
+
+Please be advised that to test the two built-in functions in Postman
+there some setting to be changed,
+refer to my article "Postman Settings for testing express.json and express.urlencoded"
+in the README.md file
 */
 // URL: http://localhost:3000/prop
 app.post("/prop", (req, res) => {
     console.log(req.body);
-    // When using .json() => // { prop: 'Our JSON Object Property Value' }
-    // When using .urlencoded() => // { prop: ' "Our JSON Object Property Value"' }
+    /*
+    Consider the following 2 different output:
+    > When using .json() => // { prop: 'Our JSON Object Property Value' }
+    > When using .urlencoded() => // { prop: ' "Our JSON Object Property Value"' }
+    */
     res.send(req.body); // will be seen in Postman
 });
 

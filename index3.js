@@ -23,6 +23,7 @@ but using different type of HTTP methods.
 Look at the example below:
 We have the same route path value of "/crud", just as an example,
 but different HTTP method:
+
 - Route "/crud" => .get() HTTP method
 - Route "/crud" => .post() HTTP method
 - Route "/crud" => .put() HTTP method
@@ -30,8 +31,9 @@ but different HTTP method:
 
 all have same URL: http://localhost:3000/crud
 
-If run it in the browser only the get method will be executed,
-but with Postman we can practice the others also
+Note:
+If we run it in the browser, only the get() method will be executed,
+but with Postman we can practice the other methods also :-)
 */
 
 app.get('/crud', (req, res) => {
@@ -55,13 +57,16 @@ app.listen(PORT, () => {
 });
 
 /*
-Now instead of repeating the same route 4 times!
+Now instead of repeating the same route with app. 4 times!
 It's better to use Route Chaining.
-You can create chainable route handlers for a route path by using app.route(). Because the path is specified at a single location, 
+You can create chainable route handlers for a route path by using app.route(). 
+Because the path is specified at a single location, 
 creating modular routes is helpful, as is reducing redundancy and typos.
 Link: https://expressjs.com/en/guide/routing.html#app-route
 
-using our "app" express object
+The steps:
+**********
+Using our "app" express object
 but instead of attaching the HTTP method,
 we attach .route() express method
 - app.route()
@@ -70,7 +75,7 @@ inside the route() method, we put the path:
 Then chaining the required methods:
 - app.route(path).get(...).post(...).put(...).etc...
 But we have to remove the Route Path first parameter from each method
-
+- Using Postman to test the route(): http://localhost:3000/book
 The same example from Express Guide:
 all have same URL: http://localhost:3000/book
 */
