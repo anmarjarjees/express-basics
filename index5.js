@@ -4,8 +4,6 @@ Before reading this file, please refer to the following file(s) and review them 
 - index2.js
 - index3.js
 - index4.js
-
-Working with "static files"
 */
 import express from "express";
 import data from './data/mock-data.json' assert { type: 'json' };
@@ -14,20 +12,14 @@ const app = express();
 
 const PORT = 3000;
 
-// URL => http://localhost:3000/
-// app.get('/', (req, res) => {
-//     res.send('<h1>ExpressJS App: The root</h1>');
-// });
+/* 
+Working with "static files"
+*/
 
 // URL => http://localhost:3000/users
 app.get("/users", (req, res) => {
     // using the response with the method .json() to get the JSON data:
     res.json(data);
-});
-
-// URL => http://localhost:3000/
-app.get('/', (req, res) => {
-    res.send('<h1>ExpressJS App: The root</h1>');
 });
 
 /*
@@ -45,7 +37,8 @@ Then search for "Built-in middleware"
 
 /*
 Practicing the express.static:
-Targeting our "static" folder which is called "public" that contains static files: html, images, css, ...
+Targeting our "static" folder which is called "public" 
+that contains static files: html, images, css, ...
 
 .static() method:
 -----------------
@@ -67,6 +60,12 @@ the .static() method is passed to the express app method .use()
 
 app.use(express.static('public'));
 /*
+NOTE: 
+If the .HTML files were saved in the root folder of the project,
+we pass the value of "__dirname" => app.use(express.static('__dirname')
+*/
+
+/*
 Now to access these files:
 - Using the root url with the port => http://localhost:3000
 - Adding the rout which is the folder name which is "img"
@@ -76,9 +75,16 @@ http://localhost:3000/img/dish2.jpg
 http://localhost:3000/img/dish3.jpg
 */
 
-// Let's try to access our two HTML files, we have 2 html files "index.html" and "about.html":
-// index.html = is the default so no need to specify => http://localhost:3000/
-// http://localhost:3000/about.html
+/*
+Render the HTML file(s):
+Let's try to access our two HTML files, we have 2 html files:
+> "index.html" 
+> "about.html"
+
+index.html => is the default so no need to specify => http://localhost:3000/
+"about.html" => http://localhost:3000/about.html
+*/
+
 
 /*
 To create a virtual path prefix (where the path does not actually exist in the file system) 

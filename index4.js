@@ -13,7 +13,7 @@ const PORT = 3000;
 
 // URL => http://localhost:3000/
 app.get('/', (req, res) => {
-    res.send('<h1>ExpressJS App: The root</h1>');
+    res.send('<h1>Our ExpressJS App: The root</h1>');
 });
 
 /*

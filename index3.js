@@ -11,15 +11,18 @@ const app = express();
 
 const PORT = 3000;
 
+/*
+With some complex applications, 
+we might have several route that has the same path
+but using different type of HTTP methods.
+*/
+
 // URL => http://localhost:3000/
 app.get('/', (req, res) => {
-    res.send('<h1>ExpressJS App: The root</h1>');
+    res.send('<h1>Our ExpressJS App: The root</h1>');
 });
 
 /*
-With some complex applications, we might have several route that has the same path
-but using different type of HTTP methods.
-
 Look at the example below:
 We have the same route path value of "/crud", just as an example,
 but different HTTP method:
