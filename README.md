@@ -75,19 +75,30 @@ After running the command "npm init", you will have above "package.json" file
 
 NOTE:
 - You can add -y to skip all the questions:
+```
 > npm init -y
+```
 
 3. Now install Express in your working directory (folder) and save it in the dependencies list:
+```
 > npm install express
+```
+
 Or just using "i" for install:
+```
 > npm i express
+```
 
 To install Express temporarily and not add it to the dependencies list:
+```
 > npm install express --no-save
+```
 
 After installing "express", your folder will have these two new content:
 - node_modules
 - package-lock.json
+
+NOTE: the JSON file "package-lock.json" is used by node to lock the current versions of the dependencies/modules that we have installed in this project. We do NOT touch this file, it's just used by node when are run the command "npm install" in another device so node will make sure to install the same versions of the dependencies that we used in our project.
 
 Plus modifying the "package.json" file. After install "express", you will have the dependencies package:
 ```
@@ -101,10 +112,20 @@ refer to my code file: index.js
 5. Another optional package but very important is called "nodemon". Based on what they say in nodemon official website: Nodemon is a utility that will monitor for any changes in your source code and automatically restart your server. In other words, it will restart your server automatically every time you save your file.
 - [nodemon npm](https://www.npmjs.com/package/nodemon)
 - [nodemon.io](https://nodemon.io/)
-- You can install nodemon as a dependency:
+- You can also install nodemon as a dependency:
+```
 > npm install nodemon
-- Or installing nodemon as a development dependency: [npm install <package-name> --save-dev]
+```
+
+- Or installing nodemon as a development dependency since we only need it for the development environment:
+
+The code syntax for installing any package/tool as dev dependency:
+  - [npm install <package-name> --save-dev]:
+
+So the command will be:
+```
 > npm install nodemon --save-dev  
+```
 
 ## The differences between dependency and development dependency:
 - "dependencies": Packages required by your application in production.
@@ -121,10 +142,14 @@ inside package.json, you can see that "express" is for sure onr of the dependenc
     "nodemon": "^2.0.19"
   }
 ```
+
 NOTE:
+
 You can install more than one package together within a single command:
-in the example below, we are installing "express" and "nodmon" by running this one command:
-> npm install express nodmon
+in the example below, we are installing "express" and "nodemon" by running this one command:
+```
+> npm install express nodemon
+```
 
 6. Modify the package.json file manually by replacing the property "test" of the script below:
 ```
@@ -139,16 +164,20 @@ in the example below, we are installing "express" and "nodmon" by running this o
     "start": "nodemon"
   },
 ```
+
 Tip: 
+
 Since your application entry point file named "index", so you can exclude the file name:
     - You can just write:
         > "start": "nodemon"
 
-But remember that if your entry point which is the .js file has different name, you will have to specify
+But remember that if your entry point which is the .js file has different name other than "index", you will have to specify the name
 
-Finally, one more last change, if you are planning to load JSON files, you will have to specify this also:
+
+7. Finally, one more last change, if you are planning to load JSON files in your project, you will have to specify this also:
     - add a separate flag "--experimental-json-modules" to enable experimental support for import of JSON files. 
- You can read more about this topic in this old article about ["--experimental-modules"](https://nodejs.medium.com/announcing-a-new-experimental-modules-1be8d2d6c2ff)
+ You can read more about this topic in this old article about ["--experimental-modules"](https://nodejs.medium.com/announcing-a-new-experimental-modules-1be8d2d6c2ff). So the final line in "package.json" will be like this:
+
 ```
  "scripts": {
     "start": "nodemon --experimental-json-modules"
@@ -156,9 +185,10 @@ Finally, one more last change, if you are planning to load JSON files, you will 
 ```
 Swap nodemon instead of node to run your code, and now your process will automatically restart when your code changes.
 
-7. One more optional but good change, remember that in node.js we used require() function to include other modules as it's the original way to import/embed modules since the first versions of node.js and still working with the new versions. 
+8. One more optional but good change, remember that in node.js we used require() function to include other modules as it's the original way to import/embed modules since the first versions of node.js and still working with the new versions. 
+
 However, we can also use the "import" with "exports" command going with the new versions to import modules. This technique has been introduced in ES6. So if you like to go with this option, you will need to modify the "package,json" file by adding the property and value ["type": "module"]. Here is what VS Code will tell your *"When set to "module", the type field allows a package to specify all .js files within are ES modules. If the "type" field is omitted or set to "commonjs", all .js files are treated as CommonJS."*:<br>
-You can add it anywhere at the beginning: "type": "module"
+You can add it anywhere at the beginning: **"type": "module"**
 ```
 {
   "type": "module",
@@ -168,33 +198,41 @@ You can add it anywhere at the beginning: "type": "module"
   "main": "index.js",
 ```
 
-8. Now, you can create your entry point js file "index.js"
+9. Now, you can create your entry point js file to run your application like "index.js" or "app.js". Please remember that 
 
-9. To run the app:
-- The default command (assuming that the file is index.js), notice that no need to specify .js extension as note will default it to .js:
+10. To run the app (with node or nodemon):
+- The default command without using "nodemon" (assuming that the file is index.js), notice that no need to specify .js extension as note will default it to .js:
   ```
     > node index
   ```
-    <br>Or since the file name is "index" we can even use this code as we learnt with node.js:
+
+Or since the file name is "index" we can even use this code as we learnt with node.js:
   ```
     > node .
   ```
-    <br>Otherwise, you have to specify:<br>
+
+Otherwise, you have to specify:
   ```
     > node index1
   ```
-- The "run" command after installing **"nodemon"**:
+
+- Since we installed **"nodemon"** so the "run" command after installing **"nodemon"** and changed the "script" inside the JSON file by adding "dev" property:
 ```
     > npm run dev
 ```
-    <br>OR just use this command assuming that the entry point file is "index.js":<br>
+
+OR just use this command assuming that the entry point file is "index.js":
 ```
     > npm start
 ```
-    <br>if you want to run other file as an entry point to your app and the name is not index, you have to write the name:
+
+If you want to run other file as an entry point to your app and the name is not "index", you have two options:
+- Either change the value of the "main" inside JSON file:  "main": "any-name.js"
+- Or you have to write/specify the file name, example:
 ```
     > npm start index1
 ```
+
  |***:computer: Code Reference: index1.js***|
  |:---:|
 
