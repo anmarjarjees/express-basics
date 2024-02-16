@@ -170,20 +170,31 @@ You can add it anywhere at the beginning: "type": "module"
 
 8. Now, you can create your entry point js file "index.js"
 
-9. to run the app:
+9. To run the app:
 - The default command (assuming that the file is index.js), notice that no need to specify .js extension as note will default it to .js:
+  ```
     > node index
+  ```
     <br>Or since the file name is "index" we can even use this code as we learnt with node.js:
+  ```
     > node .
+  ```
     <br>Otherwise, you have to specify:<br>
+  ```
     > node index1
-- The run command after installing nodemon:
+  ```
+- The "run" command after installing **"nodemon"**:
+```
     > npm run dev
+```
     <br>OR just use this command assuming that the entry point file is "index.js":<br>
+```
     > npm start
+```
     <br>if you want to run other file as an entry point to your app and the name is not index, you have to write the name:
+```
     > npm start index1
-
+```
  |***:computer: Code Reference: index1.js***|
  |:---:|
 

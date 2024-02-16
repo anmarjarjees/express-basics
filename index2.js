@@ -66,12 +66,12 @@ app.get('/about', (req, res) => {
 });
 
 // Another example with getting data from a JSON FILE
-// URL => http://localhost:3000/users
 /*
 NOTE: We need to use "Postman" to test "put", "post", "delete"
 For practising, we are going to get the data from JSON file
 To test it we can use the Postman and the browser
 */
+// URL => http://localhost:3000/users
 app.get("/users", (req, res) => {
     // using the response with the method ".json()"" to get the JSON data 
     // and send a JSON response to the route handler:

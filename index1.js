@@ -49,6 +49,7 @@ app.listen(PORT, () => {
 
   // outputting the data (JSON File):
   console.log(data);
+  console.log("\nDone!");
 });
 // To run this file (ReadMe content) => npm start index1
 // You will see this error in the browser => Cannot GET /
@@ -56,5 +57,8 @@ app.listen(PORT, () => {
 // Will be solved in the next file
 // To break the running server => CTRL + C
 /* 
-Warning: To load an ES module, set "type": "module" in the package.json or use the .mjs extension.
+Warning: 
+To load an ES module, 
+set "type": "module" in the package.json 
+or use the .mjs extension.
 */
