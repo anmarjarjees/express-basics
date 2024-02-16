@@ -262,7 +262,7 @@ I have done the following changes:
 - Changing the table by adding "Job Title" field instead of "IP Address"
 - Reduce the number of returned rows to 30
 - Change the format from "CSV" to "JSON"
-![My Mackaroo Schema](/repo-assets/my-macharoo-scheema.jpg)
+![My Mackaroo Schema](/repo-assets/my-mackaroo-schema.jpg)
 
 - Then download the json file and save it into your project folder inside a sub-folder named "data" by convention.
 
