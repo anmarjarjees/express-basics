@@ -79,6 +79,13 @@ NOTE:
 > npm init -y
 ```
 
+### NOTE To Recap:
+remember that we used this property: ["main": "index.js"] in node.js subject so we can specify the default JavaScript file to launch our application through the use of this command:
+```
+> node .
+```
+so we can specify a different default JavaScript file with the "main" property to act as the main entry point to run our application.  However we will use nodemon to run/test out project locally and this setting will be needed for the publishing.
+
 3. Now install Express in your working directory (folder) and save it in the dependencies list:
 ```
 > npm install express
@@ -117,7 +124,7 @@ refer to my code file: index.js
 > npm install nodemon
 ```
 
-- Or installing nodemon as a development dependency since we only need it for the development environment:
+- Or installing nodemon as a **development dependency** since we only need it for the development environment:
 
 The code syntax for installing any package/tool as dev dependency:
   - [npm install <package-name> --save-dev]:
@@ -151,31 +158,41 @@ in the example below, we are installing "express" and "nodemon" by running this 
 > npm install express nodemon
 ```
 
-6. Modify the package.json file manually by replacing the property "test" of the script below:
+6. Modify the **"package.json"** file by adding a new property inside the "script". Remember that with pure node environment, we can run any .js file using this command as we did before:
 ```
-- The default initial code:
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
+node file-name
 ```
-- the new updated code:
+
+But since we installed **"nodemon"**, to make the use of it, we need to add a new property "start" inside the original object property "scripts" to start our application with nodemon. 
+
+Below is the default content for "scripts" inside the JSON file:
+```
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+  }
+```
+
+First, We can remove this property "test" with its value as we are not going to use it **(optional step)**.
+
+Then modify the content by adding "start" script with the following values:
 ```
    "scripts": {
-    "start": "nodemon"
+    "start": "nodemon index1.js"
   },
 ```
 
 Tip: 
-
-Since your application entry point file named "index", so you can exclude the file name:
+If your application entry point file for example "index1" already identified in the "main" property, so you can exclude the file name:
     - You can just write:
+    ```
         > "start": "nodemon"
-
-But remember that if your entry point which is the .js file has different name other than "index", you will have to specify the name
+    ```
+#### NOTE:
+By default the entry point (the main file) will be set to "index.js" when we initialize the package.json file, but remember that if your entry point which is the .js file has different name other than "index", you will have to specify the name
 
 
 7. Finally, one more last change, if you are planning to load JSON files in your project, you will have to specify this also:
-    - add a separate flag "--experimental-json-modules" to enable experimental support for import of JSON files. 
+    - add a separate flag **"--experimental-json-modules"** to enable experimental support for import of JSON files. 
  You can read more about this topic in this old article about ["--experimental-modules"](https://nodejs.medium.com/announcing-a-new-experimental-modules-1be8d2d6c2ff). So the final line in "package.json" will be like this:
 
 ```
@@ -183,12 +200,28 @@ But remember that if your entry point which is the .js file has different name o
     "start": "nodemon --experimental-json-modules"
   },
 ```
+
+
+Now we could also more specify the entry-point .js file beside specifying it in the "main" ["main":"index5.js"] as shown below, but since we specify it in the main property it should work fine also:
+```
+ "scripts": {
+    "start": "nodemon --experimental-json-modules index5.js"
+  },
+```
 Swap nodemon instead of node to run your code, and now your process will automatically restart when your code changes.
+
 
 8. One more optional but good change, remember that in node.js we used require() function to include other modules as it's the original way to import/embed modules since the first versions of node.js and still working with the new versions. 
 
-However, we can also use the "import" with "exports" command going with the new versions to import modules. This technique has been introduced in ES6. So if you like to go with this option, you will need to modify the "package,json" file by adding the property and value ["type": "module"]. Here is what VS Code will tell your *"When set to "module", the type field allows a package to specify all .js files within are ES modules. If the "type" field is omitted or set to "commonjs", all .js files are treated as CommonJS."*:<br>
-You can add it anywhere at the beginning: **"type": "module"**
+However, we can also use the ["import"](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) with ["exports"](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) statements which are the native JavaScript modules, so we can also go with the new versions to import modules. This technique has been introduced in ES6. So if you like to go with this option, you will need to modify the "package,json" file by adding a new property and value: 
+```
+"type": "module",
+```
+
+Here is what VS Code will tell us:
+    **"When set to "module", the type field allows a package to specify all .js files within are ES modules. If the "type" field is omitted or set to "commonjs", all .js files are treated as CommonJS."**
+    
+    You can add it anywhere at the beginning: **"type": "module"**:
 ```
 {
   "type": "module",
@@ -198,9 +231,7 @@ You can add it anywhere at the beginning: **"type": "module"**
   "main": "index.js",
 ```
 
-9. Now, you can create your entry point js file to run your application like "index.js" or "app.js". Please remember that 
-
-10. To run the app (with node or nodemon):
+9. To run the app (with node or nodemon):
 - The default command without using "nodemon" (assuming that the file is index.js), notice that no need to specify .js extension as note will default it to .js:
   ```
     > node index
@@ -216,17 +247,21 @@ Otherwise, you have to specify:
     > node index1
   ```
 
-- Since we installed **"nodemon"** so the "run" command after installing **"nodemon"** and changed the "script" inside the JSON file by adding "dev" property:
+- Since we installed **"nodemon"** so the "run" command after installing **"nodemon"** and changed the "script" inside the JSON file:
 ```
-    > npm run dev
+    > npm start
+```
+Notice that npm will start running the "main" JavaScript file which is "index1.js" according to our JSON file. So to run and test all the other .js files in this repo, we need to specify each one:
+```
+ > npm start index2
 ```
 
-OR just use this command assuming that the entry point file is "index.js":
+Yes we can just use this command assuming that the entry point file is "index.js" if we go by the default initialized settings of JSON:
 ```
     > npm start
 ```
 
-If you want to run other file as an entry point to your app and the name is not "index", you have two options:
+In other words, if you want to run other file as an entry point to your app and the name is not "index", you have two options:
 - Either change the value of the "main" inside JSON file:  "main": "any-name.js"
 - Or you have to write/specify the file name, example:
 ```
@@ -235,6 +270,28 @@ If you want to run other file as an entry point to your app and the name is not 
 
  |***:computer: Code Reference: index1.js***|
  |:---:|
+
+
+# Other Setting for "script.js"
+Notice for local testing, learning, and loading JSON content, we can use these simplified settings as we did above:
+```
+ "scripts": {
+    "start": "nodemon --experimental-json-modules"
+  },
+```
+
+But for both dev. and production we can use these settings by specifying a new property for example "dev" by convention:
+```
+  "scripts": {
+    "start": "script.js",
+    "dev": "nodemon"
+  },
+```
+
+In such case, to run/test our application, we use:
+```
+npm run dev
+```
 
 # Express.js and Node.js
 ![ExpressJs and Node.JS HTTP Diagram](/repo-assets/express-workflow.jpg)

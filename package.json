@@ -3,7 +3,7 @@
   "name": "express-basics",
   "version": "1.0.0",
   "description": "The basics of Express.JS",
-  "main": "index.js",
+  "main": "index5.js",
   "scripts": {
     "start": "nodemon --experimental-json-modules"
   },
